@@ -1,5 +1,11 @@
-import pandas as pd
-from auto_complete_file import auto_complete
+from phonebook_app.db_administration import manage
 
-df = pd.read_csv("phone_book.csv")
-print(df)
+run = manage.AdminTable("Никита")
+
+# run.add_rows()
+# print(run.show_table())
+# print(run.delete_row(frffr))
+# print(run.show_table())
+# print(run.show_table())
+# run.show_table_pagination()
+print(run.search_rows("Дмитрий"))

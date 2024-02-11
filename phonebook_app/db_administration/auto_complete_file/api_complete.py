@@ -29,10 +29,10 @@ async def start_session(number):
 
 
 async def write_to_file(csv_row):
-    async with aiofiles.open("phone_book.csv", "a") as csv_file:
+    async with aiofiles.open("./table_app/db/phone_book.csv", "a") as csv_file:
         writer = csv.writer(csv_file)
         await writer.writerow(csv_row)
 
 
-def auto_complete(number):
+def auto_complete_csv_file(number):
     asyncio.run(start_session(number))
