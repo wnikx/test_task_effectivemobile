@@ -9,7 +9,7 @@ potential_phone_number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 
 def auto_complete_csv_file(count):
-    with open("./table_app/db/phone_book.csv", "a") as csv_file:
+    with open("./phonebook_app/db/phone_book.csv", "a") as csv_file:
         for _ in range(count):
             first_name, patronymic, last_name = RussianNames().get_person().split()
             company = random.choice(companies)

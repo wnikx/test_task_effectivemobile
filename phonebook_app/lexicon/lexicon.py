@@ -9,5 +9,8 @@ lex: dict = {
 -- 6. [white]Удаление записи в таблице[/white]
 -- 7. [white]Поиск по таблице[/white]
 -- 8. [white]Автозаполнение таблицы[/white]
--- 0. [white]Настройки[/white]"""
+-- 0. [white]Настройки[/white]""",
+    "default_title": "[not italic]:phone:[/] Телефонная книга [not italic]:phone:[/]",
+    "page_does_not_exist": "- [white]Такой страницы не существует[/white]",
+    "input_correct_data": "- [white]Введите коректные данные[/white]",
 }

@@ -29,7 +29,7 @@ async def start_session(number):
 
 
 async def write_to_file(csv_row):
-    async with aiofiles.open("./table_app/db/phone_book.csv", "a") as csv_file:
+    async with aiofiles.open("./phonebook_app/db/phone_book.csv", "a") as csv_file:
         writer = csv.writer(csv_file)
         await writer.writerow(csv_row)
 

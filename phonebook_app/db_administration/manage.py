@@ -1,6 +1,7 @@
 from .auto_complete_file import api_complete, simple_complete
 import pandas as pd
-from style.show_table import create_table
+from style.style import stylish_output, stylish_output_add_operation
+import csv
 
 
 class AdminTable:
@@ -25,24 +26,24 @@ class AdminTable:
     def show_table_pagination(self):
         """Постраничный вывод файла phone_book.csv"""
 
-        df = pd.read_csv(self.TABLE, index_col=None,
-                         chunksize=self.pagination)
+        df = pd.read_csv(self.TABLE, index_col=None, chunksize=self.pagination)
+        page = 0
         for chunk in df:
-            print(chunk)
+            page += 1
+            stylish_output(chunk, f'"{page}" страница')
 
     def show_table_page(self, num: int):
         """Демонстрация конкретной страницы файла phone_book.csv"""
 
         page = num * self.pagination
-        return self.df.iloc[page: page + 10]
+        stylish_output(self.df.iloc[page - 10: page], f"{num} страница")
 
-    def append_row(self, row: list):
+    def append_row(self, new_row: dict):
         """Добавление строки в файл phone_book.csv"""
 
-        with open("self.TABLE", "a") as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow(row)
-            return "Запись добавлена"
+        self.df = self.df._append(new_row, ignore_index=True)
+        self.df.to_csv(self.TABLE, index=False)
+        stylish_output_add_operation("Запись добавлена")
 
     def update_row(self, dig: int, column: str, value: str):
         """Изменение конкретной записи в файле phone_book.csv"""
@@ -79,4 +80,4 @@ class AdminTable:
     def show_table(self):
         """Демонстрация всех записей в файле phone_book.csv"""
 
-        create_table(self.df)
+        stylish_output(self.df)

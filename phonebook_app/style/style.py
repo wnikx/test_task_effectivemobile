@@ -3,12 +3,15 @@ from rich.table import Table
 from rich.style import Style
 from rich.text import Text
 from rich import box
+from lexicon.lexicon import lex
+
+console = Console()
 
 
-def create_table(df):
+def stylish_output(df, title=lex["default_title"]):
     # Создание новой таблицы Rich
     table = Table(show_header=True, header_style="cyan")
-    table.title = "[not italic]:phone:[/] Телефонная книга [not italic]:phone:[/]"
+    table.title = title
     table.border_style = "bright_yellow"
     table.box = box.MINIMAL
     # Добавление заголовков столбцов
@@ -40,5 +43,9 @@ def create_table(df):
         )
 
     # Вывод таблицы
-    console = Console()
     console.print(table, justify="center")
+
+
+def stylish_output_add_operation(word):
+    console.rule(f"[bold][white]{word}[/white][/bold]",
+                 style="green")
