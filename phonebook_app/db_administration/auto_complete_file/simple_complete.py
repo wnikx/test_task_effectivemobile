@@ -15,9 +15,9 @@ def auto_complete_csv_file(count):
             company = random.choice(companies)
             number = [random.choice(potential_phone_number)
                       for _ in range(10)]
-            w_num = '7' + ''.join(number)
+            w_num = '+7-' + ''.join(number)
             random.shuffle(number)
-            p_num = '7' + ''.join(number)
+            p_num = '+7-' + ''.join(number)
             csv_row = [last_name, first_name, patronymic,
                        company, w_num, p_num]
             writer = csv.writer(csv_file)

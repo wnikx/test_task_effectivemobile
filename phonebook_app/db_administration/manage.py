@@ -7,11 +7,10 @@ import csv
 class AdminTable:
     TABLE = "./phonebook_app/db/phone_book.csv"
 
-    def __init__(self, name: str = "Пользователь", api: bool = False, count: int = 50, pagination: int = 10):
+    def __init__(self, name: str = "Пользователь", api: bool = False, count: int = 20):
         self.username = name
         self.api = api
         self.count = count
-        self.pagination = pagination
         self.df = pd.read_csv(self.TABLE, index_col=None)
         self.df.index = self.df.index + 1
 
@@ -26,7 +25,7 @@ class AdminTable:
     def show_table_pagination(self):
         """Постраничный вывод файла phone_book.csv"""
 
-        df = pd.read_csv(self.TABLE, index_col=None, chunksize=self.pagination)
+        df = pd.read_csv(self.TABLE, index_col=None, chunksize=10)
         page = 0
         for chunk in df:
             page += 1
@@ -35,7 +34,9 @@ class AdminTable:
     def show_table_page(self, num: int):
         """Демонстрация конкретной страницы файла phone_book.csv"""
 
-        page = num * self.pagination
+        self.df = pd.read_csv(self.TABLE, index_col=None)
+        self.df.index = self.df.index + 1
+        page = num * 10
         stylish_output(self.df.iloc[page - 10: page], f"{num} страница")
 
     def append_row(self, new_row: dict):
@@ -43,7 +44,9 @@ class AdminTable:
 
         self.df = self.df._append(new_row, ignore_index=True)
         self.df.to_csv(self.TABLE, index=False)
+        print()
         stylish_output_add_operation("Запись добавлена")
+        print()
 
     def update_row(self, dig: int, column: str, value: str):
         """Изменение конкретной записи в файле phone_book.csv"""
@@ -54,11 +57,8 @@ class AdminTable:
     def delete_row(self, dig: int):
         """Удаление строки из файла phone_book.csv"""
 
-        if isinstance(dig, int) and len(self.df) > dig > 0:
-            self.df = df.drop(dig)
-            self.df.to_csv(self.TABLE, index=False)
-            return f"Запись {dig} удалена!"
-        return "Некорректные данные. Пожалуйста введите корректный номер строки который хотите удалить."
+        self.df = self.df.drop(dig)
+        self.df.to_csv(self.TABLE, index=False)
 
     def search_rows(self, value: list):
         """Поиск записей в файле phone_book.csv"""
@@ -75,9 +75,11 @@ class AdminTable:
                     (df["Телефон личный"] == f'{value[index]}')
                     ]
             index += 1
-        return df
+        stylish_output(df, f'Поиск - {" ".join(value)}')
 
     def show_table(self):
         """Демонстрация всех записей в файле phone_book.csv"""
 
+        self.df = pd.read_csv(self.TABLE, index_col=None)
+        self.df.index = self.df.index + 1
         stylish_output(self.df)
