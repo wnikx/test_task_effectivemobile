@@ -23,7 +23,7 @@
 git clone https://github.com/wnikx/test_task_effectivemobile
 ```
 
-#### 2. Переходим в терминал и открывает дерикторию с проектом:
+#### 2. Переходим в терминал и открываем дерикторию с проектом:
 
 ```
 cd /path/to/test_task_effectivemobile
