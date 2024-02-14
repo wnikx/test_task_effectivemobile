@@ -31,13 +31,21 @@ git clone https://github.com/wnikx/test_task_effectivemobile
 cd /path/to/test_task_effectivemobile
 ```
 
-#### 3. Запускаем приложение:
+#### 3. Подключаем виртуальное окружение и устанавливаем необходимые пакеты:
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+#### 4. Запускаем приложение:
 
 ```
 python3 phonebook_app/main.py
 ```
 
-#### 4. Читаем документацию и пользуемся приложением:
+#### 5. Читаем документацию и пользуемся приложением:
 
 ```
 test_task_effectivemobile/doc.txt
