@@ -57,6 +57,8 @@ class AdminTable:
     def delete_row(self, dig: int):
         """Удаление строки из файла phone_book.csv"""
 
+        self.df = pd.read_csv(self.TABLE, index_col=None)
+        self.df.index = self.df.index + 1
         self.df = self.df.drop(dig)
         self.df.to_csv(self.TABLE, index=False)
 
