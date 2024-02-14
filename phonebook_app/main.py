@@ -7,6 +7,8 @@ console = Console()
 
 
 def start_session():
+    """Начало сессии для определенного юзера"""
+
     user = AdminTable()
     console.rule(f"[bold][white]{lex['start']}[/white][/bold]",
                  style="#FFD700")
@@ -15,6 +17,8 @@ def start_session():
 
 
 def start_work(user):
+    """Старт работы с юзером"""
+
     while True:
         console.print(lex["user_comma"])
         user_input = input(lex["user_input"])
